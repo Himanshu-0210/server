@@ -62,7 +62,7 @@ class UserController {
             console.log(error)
         }
     }
-
+    
 
     static profile = async (req, res) => {
         try {
