@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Live_url="mongodb+srv://himanshu:himanshu91@cluster0.tnpsfnu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 const connectDB = async () => {
-    return mongoose.connect(Live_url)
+    return mongoose.connect(process.env.LIVE_URL)
 
         .then(() =>{
             console.log('MongoDB connected successfully');

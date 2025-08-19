@@ -1,6 +1,6 @@
 const UserModel = require('../model/User')
 const bcrypt = require('bcrypt')
-const jwt=require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 
 
 class UserController {
@@ -40,20 +40,23 @@ class UserController {
                 return res.status(400).json({ message: "Invalid Credentials" })
             }
             // token creation
-            const token = jwt.sign({ ID: user._id }, 'kuchbhi@91')
-
+            var token = jwt.sign(
+                { ID: user._id },
+                process.env.JWT_SECRET,
+                { expiresIn: "2d" }
+            );
 
             // send token in HTTP only cookie
-            res.cookie("token",token,{
-                httpOnly:true,
+            res.cookie("token", token, {
+                httpOnly: true,
             })
             res
                 .status(200)
                 .json({
                     message: "Login Successful",
-                    role:user.role,
-                    name:user.name,
-                    email:user.email,
+                    role: user.role,
+                    name: user.name,
+                    email: user.email,
                 })
         } catch (error) {
             console.log(error)
@@ -61,22 +64,22 @@ class UserController {
     }
 
 
-    static profile = async(req,res)=>{
-        try{
+    static profile = async (req, res) => {
+        try {
             console.log("hello profile")
         }
-        catch(error){
+        catch (error) {
             console.log(error)
         }
     }
 
-    
-    static logout = async(req,res)=>{
-        try{
+
+    static logout = async (req, res) => {
+        try {
             res.clearCookie("token")
-            res.status(200).json({message:"logout successfully"})
+            res.status(200).json({ message: "logout successfully" })
         }
-        catch(error){
+        catch (error) {
             console.log(error)
         }
     }
