@@ -17,7 +17,7 @@ app.use(cookieParser())
 
 app.use(
     cors({
-        origin:"https://silly-brioche-d836b2.netlify.app/",
+        origin:"https://silly-brioche-d836b2.netlify.app",
         credentials:true,
     })
 )
